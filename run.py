@@ -35,5 +35,5 @@ if __name__ == "__main__":
     try:
         day = int(sys.argv[1])
     except IndexError:
-        day = datetime.now().day
+        day = datetime.now().day + 1
     run_day(day)
