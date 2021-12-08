@@ -16,7 +16,7 @@ def run(func, filename="filename"):
 
 
 def run_day(day):
-    module = import_module(f"{day}.main")
+    module = import_module(f"day_{day}.main")
 
     print(f"DAY {day}")
 
@@ -26,9 +26,9 @@ def run_day(day):
 
         print(f"--- {i} ---")
         print("sample: ", end="")
-        run(getattr(module, i), f"{day}/sample")
+        run(getattr(module, i), f"day_{day}/sample")
         print("input:  ", end="")
-        run(getattr(module, i), f"{day}/input")
+        run(getattr(module, i), f"day_{day}/input")
 
 
 if __name__ == "__main__":
