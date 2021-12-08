@@ -6,11 +6,6 @@ On my computer, ~11.5 ms compared to ~740 ms.
 
 import itertools
 
-
-def p1(f):
-    return sum(len(word) in {2, 3, 4, 7} for line in f for word in line.split()[-4:])
-
-
 LETTERS = "abcdefg"
 LETTER_TO_DIGIT = {x: i for i, x in enumerate(LETTERS)}
 WORDS = ["abcefg", "cf", "acdeg", "acdfg", "bcdf", "abdfg", "abdefg", "acf", "abcdefg", "abcdfg"]
