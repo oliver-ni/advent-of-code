@@ -22,27 +22,29 @@ impl FromStr for Instruction {
     }
 }
 
+fn parse(input: &str) -> Result<Vec<Instruction>> {
+    input.lines().map(|x| x.parse()).collect()
+}
+
 fn p1(input: &str) -> Result<i32> {
-    let (pos, depth) = input
-        .lines()
-        .map(|x| x.parse())
-        .try_fold::<_, _, Result<_>>((0, 0), |(pos, depth), inst| match inst? {
-            Instruction::Forward(num) => Ok((pos + num, depth)),
-            Instruction::Up(num) => Ok((pos, depth - num)),
-            Instruction::Down(num) => Ok((pos, depth + num)),
-        })?;
+    let (pos, depth) = parse(input)?
+        .iter()
+        .fold((0, 0), |(pos, depth), i| match i {
+            Instruction::Forward(num) => (pos + num, depth),
+            Instruction::Up(num) => (pos, depth - num),
+            Instruction::Down(num) => (pos, depth + num),
+        });
     Ok(pos * depth)
 }
 
 fn p2(input: &str) -> Result<i32> {
-    let (pos, depth, _) = input
-        .lines()
-        .map(|x| x.parse())
-        .try_fold::<_, _, Result<_>>((0, 0, 0), |(pos, depth, aim), inst| match inst? {
-            Instruction::Forward(num) => Ok((pos + num, depth + aim * num, aim)),
-            Instruction::Up(num) => Ok((pos, depth, aim - num)),
-            Instruction::Down(num) => Ok((pos, depth, aim + num)),
-        })?;
+    let (pos, depth, _) = parse(input)?
+        .iter()
+        .fold((0, 0, 0), |(pos, depth, aim), i| match i {
+            Instruction::Forward(num) => (pos + num, depth + aim * num, aim),
+            Instruction::Up(num) => (pos, depth, aim - num),
+            Instruction::Down(num) => (pos, depth, aim + num),
+        });
     Ok(pos * depth)
 }
 
