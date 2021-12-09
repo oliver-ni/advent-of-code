@@ -25,7 +25,7 @@ impl FromStr for Instruction {
 fn p1(input: &str) -> Result<i32> {
     let (pos, depth) = input
         .lines()
-        .map(|x| x.parse::<Instruction>())
+        .map(|x| x.parse())
         .try_fold::<_, _, Result<_>>((0, 0), |(pos, depth), inst| match inst? {
             Instruction::Forward(num) => Ok((pos + num, depth)),
             Instruction::Up(num) => Ok((pos, depth - num)),
@@ -37,7 +37,7 @@ fn p1(input: &str) -> Result<i32> {
 fn p2(input: &str) -> Result<i32> {
     let (pos, depth, _) = input
         .lines()
-        .map(|x| x.parse::<Instruction>())
+        .map(|x| x.parse())
         .try_fold::<_, _, Result<_>>((0, 0, 0), |(pos, depth, aim), inst| match inst? {
             Instruction::Forward(num) => Ok((pos + num, depth + aim * num, aim)),
             Instruction::Up(num) => Ok((pos, depth, aim - num)),
