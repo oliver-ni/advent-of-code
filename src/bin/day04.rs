@@ -1,5 +1,5 @@
 use anyhow::{anyhow, bail, Error, Result};
-use std::str::FromStr;
+use std::{collections::HashMap, str::FromStr};
 
 struct Cell {
     value: i32,
@@ -16,23 +16,31 @@ impl Cell {
 }
 
 struct Board {
-    inner: Vec<Vec<Cell>>,
-    num_rows: usize,
-    num_cols: usize,
+    data: Vec<Vec<Cell>>,
+    by_number: HashMap<i32, (usize, usize)>,
     row_counts: Vec<usize>,
     col_counts: Vec<usize>,
     has_won: bool,
 }
 
 impl Board {
-    fn from_data(inner: Vec<Vec<Cell>>) -> Self {
-        let num_rows = inner.len();
-        let num_cols = inner[0].len();
+    fn from_data(data: Vec<Vec<Cell>>) -> Self {
+        let num_rows = data.len();
+        let num_cols = data[0].len();
+
+        let by_number = data
+            .iter()
+            .enumerate()
+            .flat_map(|(i, row)| {
+                row.iter()
+                    .enumerate()
+                    .map(move |(j, cell)| (cell.value, (i, j)))
+            })
+            .collect();
 
         Self {
-            inner,
-            num_rows,
-            num_cols,
+            data,
+            by_number,
             row_counts: vec![0; num_rows],
             col_counts: vec![0; num_cols],
             has_won: false,
@@ -40,22 +48,23 @@ impl Board {
     }
 
     fn mark(&mut self, value: i32) {
-        for (i, row) in self.inner.iter_mut().enumerate() {
-            for (j, cell) in row.iter_mut().enumerate() {
-                if !cell.marked && cell.value == value {
-                    cell.marked = true;
-                    self.row_counts[i] += 1;
-                    self.col_counts[j] += 1;
-                    if self.row_counts[i] == self.num_cols || self.col_counts[j] == self.num_rows {
-                        self.has_won = true
-                    }
+        let num_rows = self.data.len();
+        let num_cols = self.data[0].len();
+        if let Some(&(i, j)) = self.by_number.get(&value) {
+            let cell = &mut self.data[i][j];
+            if !cell.marked && cell.value == value {
+                cell.marked = true;
+                self.row_counts[i] += 1;
+                self.col_counts[j] += 1;
+                if self.row_counts[i] == num_cols || self.col_counts[j] == num_rows {
+                    self.has_won = true
                 }
             }
         }
     }
 
     fn unmarked_sum(&self) -> i32 {
-        self.inner
+        self.data
             .iter()
             .flat_map(|row| {
                 row.iter()
