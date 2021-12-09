@@ -68,8 +68,7 @@ impl Board {
             .iter()
             .flat_map(|row| {
                 row.iter()
-                    .filter(|cell| !cell.marked)
-                    .map(|cell| cell.value)
+                    .filter_map(|cell| (!cell.marked).then(|| cell.value))
             })
             .sum()
     }
