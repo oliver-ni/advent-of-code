@@ -15,10 +15,10 @@ def run(func, filename="filename"):
         print()
 
 
-def run_day(day, module_name):
-    module = import_module(f"day_{day}.{module_name}")
+def run_day(day):
+    module = import_module(f"py.day{day:02}")
 
-    print(f"DAY {day} - {module_name}")
+    print(f"DAY {day}")
 
     for i in ("p1", "p2"):
         if not hasattr(module, i):
@@ -26,12 +26,11 @@ def run_day(day, module_name):
 
         print(f"--- {i} ---")
         print("sample: ", end="")
-        run(getattr(module, i), f"day_{day}/sample")
+        run(getattr(module, i), f"inputs/day{day:02}_sample.txt")
         print("input:  ", end="")
-        run(getattr(module, i), f"day_{day}/input")
+        run(getattr(module, i), f"inputs/day{day:02}.txt")
 
 
 if __name__ == "__main__":
-    module_name = sys.argv[2] if len(sys.argv) >= 2 else "main"
-    day = int(sys.argv[1]) if len(sys.argv) >= 2 else datetime.now().day + 1
-    run_day(day, module_name)
+    day = int(sys.argv[1]) if len(sys.argv) >= 1 else datetime.now().day + 1
+    run_day(day)
