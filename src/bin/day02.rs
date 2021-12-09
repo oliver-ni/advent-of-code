@@ -1,4 +1,4 @@
-use anyhow::{anyhow, bail, Result};
+use anyhow::{anyhow, bail, Error, Result};
 use std::str::FromStr;
 
 enum Instruction {
@@ -8,7 +8,7 @@ enum Instruction {
 }
 
 impl FromStr for Instruction {
-    type Err = anyhow::Error;
+    type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let (inst, num) = s.split_once(" ").ok_or(anyhow!("Invalid input"))?;
