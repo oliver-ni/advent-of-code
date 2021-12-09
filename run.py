@@ -26,9 +26,9 @@ def run_day(day):
 
         print(f"--- {i} ---")
         print("sample: ", end="")
-        run(getattr(module, i), f"inputs/day{day:02}_sample.txt")
+        run(getattr(module, i), f"input/day{day:02}_sample.txt")
         print("input:  ", end="")
-        run(getattr(module, i), f"inputs/day{day:02}.txt")
+        run(getattr(module, i), f"input/day{day:02}.txt")
 
 
 if __name__ == "__main__":
