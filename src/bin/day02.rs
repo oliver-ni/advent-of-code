@@ -23,7 +23,7 @@ impl FromStr for Instruction {
 }
 
 fn parse(input: &str) -> Result<Vec<Instruction>> {
-    input.lines().map(|x| x.parse()).collect()
+    input.lines().map(str::parse).collect()
 }
 
 fn p1(input: &str) -> Result<i32> {

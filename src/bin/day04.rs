@@ -100,7 +100,7 @@ fn parse(input: &str) -> Result<(Vec<i32>, Vec<Board>)> {
 
     let boards = boards
         .split("\n\n")
-        .map(|x| x.parse())
+        .map(str::parse)
         .collect::<Result<_>>()?;
 
     Ok((draws, boards))
