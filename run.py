@@ -32,5 +32,5 @@ def run_day(day):
 
 
 if __name__ == "__main__":
-    day = int(sys.argv[1]) if len(sys.argv) >= 1 else datetime.now().day + 1
+    day = int(sys.argv[1]) if len(sys.argv) >= 2 else datetime.now().day + 1
     run_day(day)
