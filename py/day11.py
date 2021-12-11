@@ -31,7 +31,7 @@ def p1(f):
             nums[p] = -t
         return len(visited)
 
-    return sum(process(t + 1) for t in range(100))
+    return sum(process(t) for t in range(1, 101))
 
 
 def p2(f):
@@ -54,4 +54,4 @@ def p2(f):
             nums[p] = -t
         return len(visited)
 
-    return next(t + 1 for t in range(10 ** 10) if process(t + 1) == len(nums))
+    return next(t for t in range(1, 10 ** 10) if process(t) == len(nums))
