@@ -49,7 +49,7 @@ def p1(f):
         if stop is None and process(t) == len(nums):
             stop = t + 100
         if t == stop:
-            return
+            break
 
     images[0].save(
         "output.gif",
