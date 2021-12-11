@@ -15,8 +15,8 @@ def run(func, filename="filename"):
         print()
 
 
-def run_day(day):
-    module = import_module(f"py.day{day:02}")
+def run_day(day, extra=None):
+    module = import_module(f"py.day{day:02}_{extra}" if extra else f"py.day{day:02}")
 
     print(f"DAY {day}")
 
@@ -32,5 +32,7 @@ def run_day(day):
 
 
 if __name__ == "__main__":
+    day = sys.argv[1:]
+    extra = sys.argv[2] if len(sys.argv) >= 3 else None
     day = int(sys.argv[1]) if len(sys.argv) >= 2 else datetime.now().day + 1
-    run_day(day)
+    run_day(day, extra)
