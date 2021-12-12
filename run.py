@@ -1,4 +1,5 @@
 import sys
+import time
 import traceback
 from datetime import datetime
 from importlib import import_module
@@ -8,7 +9,10 @@ def run(func, filename="filename"):
     try:
         with open(filename) as f:
             try:
-                print(func(f))
+                start = time.time_ns()
+                print(func(f), end="\t")
+                end = time.time_ns()
+                print(f"[{(end-start) / 10**6:.3f} ms]")
             except:
                 traceback.print_exc()
     except FileNotFoundError:
@@ -23,11 +27,11 @@ def run_day(day, extra=None):
     for i in ("p1", "p2"):
         if not hasattr(module, i):
             continue
-
         print(f"--- {i} ---")
-        print("sample: ", end="")
+
+        print("sample:", end="\t")
         run(getattr(module, i), f"input/day{day:02}_sample.txt")
-        print("input:  ", end="")
+        print("input:", end="\t")
         run(getattr(module, i), f"input/day{day:02}.txt")
 
 
