@@ -1,7 +1,7 @@
-import sys
+import argparse
 import time
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from importlib import import_module
 
 
@@ -19,24 +19,27 @@ def run(func, filename="filename"):
         print()
 
 
-def run_day(day, extra=None):
-    module = import_module(f"py.day{day:02}_{extra}" if extra else f"py.day{day:02}")
+if __name__ == "__main__":
+    now = datetime.now(timezone(timedelta(hours=-5)))
+    parser = argparse.ArgumentParser(description="Run Advent of Code solutions.")
+    parser.add_argument("--year", "-y", type=int, help="The year to run.", default=now.year)
+    parser.add_argument("--day", "-d", type=int, help="The day to run.", default=now.day)
+    parser.add_argument("--extra", "-e", help="Choose a different solution to run.")
+    args = parser.parse_args()
 
-    print(f"DAY {day}")
+    module_name = f"py.{args.year}.day{args.day:02}"
+    if args.extra:
+        module_name += f"_{args.extra}"
+
+    print(f"{module_name}")
+
+    module = import_module(module_name)
 
     for i in ("p1", "p2"):
         if not hasattr(module, i):
             continue
         print(f"--- {i} ---")
-
         print("sample:", end="\t")
-        run(getattr(module, i), f"input/day{day:02}_sample.txt")
+        run(getattr(module, i), f"input/day{args.day:02}_sample.txt")
         print("input:", end="\t")
-        run(getattr(module, i), f"input/day{day:02}.txt")
-
-
-if __name__ == "__main__":
-    day = sys.argv[1:]
-    extra = sys.argv[2] if len(sys.argv) >= 3 else None
-    day = int(sys.argv[1]) if len(sys.argv) >= 2 else datetime.now().day + 1
-    run_day(day, extra)
+        run(getattr(module, i), f"input/day{args.day:02}.txt")
