@@ -40,6 +40,6 @@ if __name__ == "__main__":
             continue
         print(f"--- {i} ---")
         print("sample:", end="\t")
-        run(getattr(module, i), f"input/day{args.day:02}_sample.txt")
+        run(getattr(module, i), f"input/{args.year}/day{args.day:02}_sample.txt")
         print("input:", end="\t")
-        run(getattr(module, i), f"input/day{args.day:02}.txt")
+        run(getattr(module, i), f"input/{args.year}/day{args.day:02}.txt")
