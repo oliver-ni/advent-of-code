@@ -99,26 +99,26 @@ class Board:
         try:
             path, target = self.find_nearest(unit)
         except TypeError:
-            return False
+            return None
 
         if len(path) > 2:
             self.units[unit] = path[1]
 
-        if len(path) <= 3 and target:
+        if len(path) <= 3 and target is not None:
             target.hp -= unit.ap
             if target.hp <= 0:
                 del self.units[target]
                 if raise_on_elf_death and target.team == "E":
                     raise ElfDeath
 
-        return True
+        return len(path) > 2 or (len(path) <= 3 and target is not None)
 
     def run_round(self, raise_on_elf_death: bool = False):
         units = sorted(self.units, key=lambda u: self.units[u])
         for unit in units:
             if unit not in self.units:
                 continue
-            if not self.move(unit, raise_on_elf_death):
+            if self.move(unit, raise_on_elf_death) is None:
                 return False
         return True
 
