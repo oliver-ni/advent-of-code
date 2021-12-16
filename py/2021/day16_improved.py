@@ -10,7 +10,7 @@ class BitView:
         self.size = (self.data.bit_length() + 3) // 4 * 4
         self.cursor = 0
 
-    def __rshift__(self, n):
+    def take_bits(self, n):
         self.cursor += n
         return (self.data >> (self.size - self.cursor)) & ((1 << n) - 1)
 
@@ -22,29 +22,29 @@ class Packet(NamedTuple):
 
 
 def parse(view: BitView):
-    version = view >> 3
-    type_id = view >> 3
+    version = view.take_bits(3)
+    type_id = view.take_bits(3)
     subpackets: list[Packet] = []
 
     if type_id == 4:
         value = 0
         while True:
-            prefix = view >> 1
+            prefix = view.take_bits(1)
             value <<= 4
-            value += view >> 4
+            value += view.take_bits(4)
             if prefix == 0:
                 break
 
     else:
-        length_type_id = view >> 1
+        length_type_id = view.take_bits(1)
 
         if length_type_id == 0:
-            total_len = view >> 15
+            total_len = view.take_bits(15)
             end = view.cursor + total_len
             while view.cursor < end:
                 subpackets.append(parse(view))
         elif length_type_id == 1:
-            num_subpackets = view >> 11
+            num_subpackets = view.take_bits(11)
             for _ in range(num_subpackets):
                 subpackets.append(parse(view))
 
