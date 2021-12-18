@@ -79,7 +79,7 @@ fn p2(input: &str) -> Result<usize> {
 }
 
 fn main() -> Result<()> {
-    let input = include_str!("../../input/day05.txt");
+    let input = include_str!("../../input/2021/day05.txt");
     println!("{}", p1(input)?);
     println!("{}", p2(input)?);
     Ok(())
