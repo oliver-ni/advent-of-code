@@ -2,7 +2,7 @@ import argparse
 import time
 import traceback
 from datetime import datetime, timedelta, timezone
-from importlib import import_module
+from importlib import import_module, reload
 
 
 def run(func, filename="filename"):
@@ -41,5 +41,6 @@ if __name__ == "__main__":
         print(f"--- {i} ---")
         print("sample:", end="\t")
         run(getattr(module, i), f"input/{args.year}/day{args.day:02}_sample.txt")
+        reload(module)
         print("input:", end="\t")
         run(getattr(module, i), f"input/{args.year}/day{args.day:02}.txt")
