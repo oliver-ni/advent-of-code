@@ -1,6 +1,5 @@
 import functools
 import math
-import textwrap
 
 
 class Thing(tuple):
