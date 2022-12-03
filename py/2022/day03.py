@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   3   00:01:55    13     88   00:04:09    33     68
+
+
 PRIO = ".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 

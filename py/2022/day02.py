@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   2   00:02:25     8     93   00:03:48     4     97
+
+
 def p1(f):
     ans = 0
 
