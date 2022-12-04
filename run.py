@@ -9,9 +9,9 @@ def run(func, filename="filename"):
     try:
         with open(filename) as f:
             try:
-                start = time.time_ns()
+                start = time.monotonic_ns()
                 print(func(f), end="\t")
-                end = time.time_ns()
+                end = time.monotonic_ns()
                 print(f"[{(end-start) / 10**6:.3f} ms]")
             except:
                 traceback.print_exc()
