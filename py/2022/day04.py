@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   4   00:01:50    51     50   00:02:11    19     82
+
+
 irange = lambda a, b: range(a, b + 1)
 
 
