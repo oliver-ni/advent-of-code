@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   5   00:10:51   584      0   00:11:29   388      0
+
+
 import re
 from collections import deque
 

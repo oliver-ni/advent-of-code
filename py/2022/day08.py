@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   8   00:02:19     6     95   00:12:23   193      0
+
+
 from math import prod
 
 

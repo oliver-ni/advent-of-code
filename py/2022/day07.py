@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   7   00:10:41    93      8   00:13:08    59     42
+
+
 from collections import defaultdict
 from pathlib import Path
 
