@@ -4,7 +4,7 @@ import itertools
 import math
 from collections import defaultdict, deque
 
-from common.bidict import Bidict
+from common import Bidict
 
 
 class ElfDeath(Exception):
@@ -86,7 +86,9 @@ class Board:
         if len(reached) == 0:
             return [], None
 
-        target = min(reached, key=lambda u: (dist[prev[u.pos]], prev[u.pos], u.hp, u.pos))
+        target = min(
+            reached, key=lambda u: (dist[prev[u.pos]], prev[u.pos], u.hp, u.pos)
+        )
         pos = target.pos
         path = []
         while pos is not None:
