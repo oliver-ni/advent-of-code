@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   9   00:13:23   734      0   00:15:23   146      0
+
+
 class lol(tuple):
     def __add__(self, other):
         return lol(a + b for a, b in zip(self, other))
