@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#  17   00:27:24   154      0   00:56:29   310      0
+
+
 from itertools import cycle
 
 ROCKS = [
