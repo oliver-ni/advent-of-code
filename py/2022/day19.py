@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#  19   01:03:39   331      0   01:12:48   262      0
+
+
 import math
 import operator
 import re

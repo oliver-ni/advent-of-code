@@ -1,3 +1,7 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#  20   00:11:06    35     66   00:12:04    13     88
+
+
 from collections import deque, namedtuple
 
 _ = namedtuple("_", ("id", "val"))
