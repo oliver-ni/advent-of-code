@@ -22,7 +22,7 @@ def p1(f):
     return nums[1000 % len(nums)].val + nums[2000 % len(nums)].val + nums[3000 % len(nums)].val
 
 
-def p1(f):
+def p2(f):
     nums = deque(_(id, int(x) * 811589153) for id, x in enumerate(f))
     order = list(nums)
 
