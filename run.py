@@ -39,8 +39,9 @@ if __name__ == "__main__":
         except ImportError:
             pass
         else:
+            data = get_data(day=args.day, year=args.year)
             with open(input_paths["input"], "w") as f:
-                f.write(get_data(day=args.day, year=args.year))
+                f.write(data)
 
     module_name = f"py.{args.year}.day{args.day:02}"
     if args.extra:
