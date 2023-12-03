@@ -29,6 +29,6 @@ def p2(f):
             idxs += [(i - 1, j) for j in range(m.start() - 1, m.end() + 1)]
             idxs += [(i + 1, j) for j in range(m.start() - 1, m.end() + 1)]
             for a, b in idxs:
-                if 0 <= a < len(lines) and 0 <= b < len(lines[a]) and lines[a][b] != ".":
+                if 0 <= a < len(lines) and 0 <= b < len(lines[a]) and lines[a][b] == "*":
                     adj[a, b].append(m.group())
     return sum(int(x[0]) * int(x[1]) for x in adj.values() if len(x) == 2)
