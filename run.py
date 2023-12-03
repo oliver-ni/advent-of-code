@@ -35,13 +35,17 @@ if __name__ == "__main__":
 
     if not os.path.exists(input_paths["input"]):
         try:
-            from aocd import get_data
+            from aocd import AocdError, get_data
         except ImportError:
             pass
         else:
-            data = get_data(day=args.day, year=args.year)
-            with open(input_paths["input"], "w") as f:
-                f.write(data)
+            try:
+                data = get_data(day=args.day, year=args.year)
+            except AocdError as e:
+                print(e)
+            else:
+                with open(input_paths["input"], "w") as f:
+                    f.write(data)
 
     module_name = f"py.{args.year}.day{args.day:02}"
     if args.extra:
