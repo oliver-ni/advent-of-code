@@ -1,3 +1,6 @@
+# Day       Time  Rank  Score       Time  Rank  Score
+#   7   00:09:40    86     15   00:23:11   386      0
+
 from collections import Counter
 from itertools import product
 
