@@ -58,7 +58,7 @@ def p2(f):
         ans = max(ans, do(grid, (0, i), SOUTH))
         ans = max(ans, do(grid, (n - 1, i), NORTH))
     for i in range(m):
-        ans = max(ans, do(grid, (0, i), EAST))
-        ans = max(ans, do(grid, (m - 1, i), WEST))
+        ans = max(ans, do(grid, (i, 0), EAST))
+        ans = max(ans, do(grid, (i, m - 1), WEST))
 
     return ans
